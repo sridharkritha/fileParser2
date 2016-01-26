@@ -1,0 +1,81 @@
+﻿Build started 26/01/2016 18:10:07.
+     1>Project "C:\Users\skrishnan\Desktop\test\fileParser\fileParser.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\fileParser.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\utility(163): warning C4244: 'initializing' : conversion from 'double' to 'const float', possible loss of data
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\utility(255) : see reference to function template instantiation 'std::_Pair_base<_Ty1,_Ty2>::_Pair_base<_Ty,const char>(_Other1 &&,_Other2 &&)' being compiled
+                 with
+                 [
+                     _Ty1=const float,
+                     _Ty2=std::string,
+                     _Ty=double,
+                     _Other1=double,
+                     _Other2=const char *
+                 ]
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\xmemory(208) : see reference to function template instantiation 'std::pair<_Ty1,_Ty2>::pair<double,const char*>(std::pair<double,const char *> &&)' being compiled
+                 with
+                 [
+                     _Ty1=const float,
+                     _Ty2=std::string
+                 ]
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\xmemory(280) : see reference to function template instantiation 'void std::allocator<_Ty>::construct<std::pair<_Ty1,_Ty2>>(std::pair<const _Kty,std::basic_string<_Elem,_Traits,_Ax>> *,_Other &&)' being compiled
+                 with
+                 [
+                     _Ty=std::pair<const float,std::string>,
+                     _Ty1=double,
+                     _Ty2=const char *,
+                     _Kty=float,
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Ax=std::allocator<char>,
+                     _Other=std::pair<double,const char *>
+                 ]
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\xtree(592) : see reference to function template instantiation 'void std::_Cons_val<std::allocator<_Ty>,_Ty,std::pair<_Ty1,_Ty2>>(_Alloc &,std::pair<const _Kty,std::basic_string<_Elem,_Traits,_Ax>> *,std::pair<_Ty1,_Ty2> &&)' being compiled
+                 with
+                 [
+                     _Ty=std::pair<const float,std::string>,
+                     _Ty1=double,
+                     _Ty2=const char *,
+                     _Alloc=std::allocator<std::pair<const float,std::string>>,
+                     _Kty=float,
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Ax=std::allocator<char>
+                 ]
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\xtree(755) : see reference to function template instantiation 'std::_Tree_nod<_Traits>::_Node *std::_Tree_val<_Traits>::_Buynode<_Ty>(_Valty &&)' being compiled
+                 with
+                 [
+                     _Traits=std::_Tmap_traits<float,std::string,std::less<float>,std::allocator<std::pair<const float,std::string>>,false>,
+                     _Ty=std::pair<double,const char *>,
+                     _Valty=std::pair<double,const char *>
+                 ]
+                 c:\users\skrishnan\desktop\test\fileparser\main.cpp(571) : see reference to function template instantiation 'std::pair<_Ty1,_Ty2> std::_Tree<_Traits>::insert<std::pair<double,const char *>>(_Valty &&)' being compiled
+                 with
+                 [
+                     _Ty1=std::_Tree_iterator<std::_Tree_val<std::_Tmap_traits<float,std::string,std::less<float>,std::allocator<std::pair<const float,std::string>>,false>>>,
+                     _Ty2=bool,
+                     _Traits=std::_Tmap_traits<float,std::string,std::less<float>,std::allocator<std::pair<const float,std::string>>,false>,
+                     _Valty=std::pair<double,const char *>
+                 ]
+       ManifestResourceCompile:
+         All outputs are up-to-date.
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\skrishnan\Desktop\test\fileParser\Debug\fileParser.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\fileParser.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\skrishnan\Desktop\test\fileParser\Debug\fileParser.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\skrishnan\Desktop\test\fileParser\Debug\fileParser.lib" /MACHINE:X86 Debug\fileParser.exe.embed.manifest.res
+         Debug\main.obj
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\fileParser.exe.embed.manifest" /manifest Debug\fileParser.exe.intermediate.manifest
+         All outputs are up-to-date.
+       LinkEmbedManifest:
+         All outputs are up-to-date.
+         fileParser.vcxproj -> C:\Users\skrishnan\Desktop\test\fileParser\Debug\fileParser.exe
+       FinalizeBuildStatus:
+         Deleting file "Debug\fileParser.unsuccessfulbuild".
+         Touching "Debug\fileParser.lastbuildstate".
+     1>Done Building Project "C:\Users\skrishnan\Desktop\test\fileParser\fileParser.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.75
