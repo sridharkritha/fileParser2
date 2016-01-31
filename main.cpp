@@ -57,7 +57,8 @@ typedef struct horse_t {
 	std::string jockey;
 	std::string trainer;
 	std::string form;
-	std::string ageWeight;
+	unsigned int age;
+	std::string weight;
 	unsigned int rating;
 	std::string odds;
 }horse_t;
@@ -204,7 +205,7 @@ std::pair <std::string,std::string> findSplitString(std::string inString, std::s
     if ((pos = inString.find(splitIdentifier)) != std::string::npos)
 	{
 		twoPartString.first = inString.substr(0,pos);
-		twoPartString.second = inString.substr(pos+1, std::string::npos);
+		twoPartString.second = inString.substr(pos+splitIdentifier.length(), std::string::npos);
 	}
 	return twoPartString;
 }
@@ -242,7 +243,10 @@ retValue_t find_ageWeight()
 		// Check for substring(yrs) in a string (BL,T 10yrs-9st-4lb)
 		if (wordVector[i].find("yrs") != std::string::npos)
 		{
-			horse.ageWeight = wordVector[i]; // 10yrs-9st-4lb
+			std::pair <std::string,std::string> ageWeight;
+			ageWeight = findSplitString(wordVector[i],"yrs-"); // 10yrs-9st-4lb
+			horse.age = atoi(ageWeight.first.c_str());  
+			horse.weight = ageWeight.second;
 			return RET_CURT_FOUND;
 		}
 	}
@@ -268,8 +272,9 @@ retValue_t  find_Form()
 			else
 			{
 				horse.form = "Unknown";
-				horse.ageWeight = wordVector[i]; // 10yrs-9st-4lb
-				return RET_NEXT_FOUND;
+				// 10yrs-9st-4lb
+				if(RET_CURT_FOUND == find_ageWeight()) return RET_NEXT_FOUND;
+				return RET_NOT_FOUND; 				
 			}
 
 		}
@@ -338,9 +343,8 @@ bool is_NextHorseExist()
 		//find_DrawNo();
 		return true;
 	}
-	//else if(horse.horseNo = find_HorseNo()) return true;
-	else 
-		return false;	 
+	else if(RET_CURT_FOUND == find_HorseNo()) return true;	
+	else return false;	 
 }
 
 
@@ -356,7 +360,7 @@ int main()
 {
 	// decimalToFraction();
 	std::ifstream infile("textFile.txt");
-	std::ofstream outfile("outFile.txt");
+	std::ofstream outfile("outfile.csv");
 	std::string line;
 	bool isNewRaceFound = false;
 	bool isNewGoingFound = false;
@@ -465,8 +469,10 @@ int main()
 					raceCardState = RC_RATING_STATE;	
 					outfile << horse.form;
 					outfile << ",";
-					outfile << horse.ageWeight;
-				    outfile << ",";					
+					outfile << horse.age;
+				    outfile << ",";	
+					outfile << horse.weight;
+				    outfile << ",";				
 				}				
 			}
 			break;
@@ -476,7 +482,9 @@ int main()
 			if(RET_NOT_FOUND != ret) 
 			{
 				raceCardState = RC_RATING_STATE;
-				outfile << horse.ageWeight;
+				outfile << horse.age;
+				outfile << ",";
+				outfile << horse.weight;
 				outfile << ",";
 			}
 			break;
