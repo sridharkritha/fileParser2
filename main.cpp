@@ -121,6 +121,42 @@ bool find_Going()
 		{
 			raceInfo.going = wordVector[i+1];
 
+			std::string yards, furlongs, meters;
+
+			if(wordVector[i-1][wordVector[i-1].size() -1]=='y')
+			{
+				yards = wordVector[i-1]; // 169y
+				i = i - 1;
+			}
+
+			if(wordVector[i-1][wordVector[i-1].size() -1]=='f')
+			{
+				furlongs = wordVector[i-1]; //  7f
+				i = i - 1;
+			}
+			if(wordVector[i-1][wordVector[i-1].size() -1]=='m')
+			{
+				meters = wordVector[i-1]; //  1m
+				i = i - 1;
+			}
+
+			// 1m 7f 169y
+			if(!meters.empty())
+			{
+				raceInfo.distance = meters;
+			}
+
+			if(!furlongs.empty())
+			{
+				raceInfo.distance += " " +furlongs;
+			}
+
+			if(!yards.empty())
+			{
+				raceInfo.distance += " " +yards;
+			}			
+
+			/*
 			if(wordVector[i-1][wordVector[i-1].size() -1]=='y')
 			{
 				raceInfo.distance = wordVector[i-3] + " " + wordVector[i-2] + " " + wordVector[i-1]; // 1m 7f 169y
@@ -136,6 +172,7 @@ bool find_Going()
 				raceInfo.distance = wordVector[i-1]; // 2m
 				i = i-1;
 			}
+			*/
 
 			raceInfo.raceClass = wordVector[i-1]; i = i-1;
 			// Find and Replace ')'
@@ -163,6 +200,17 @@ retValue_t  find_HorseNo()
 	return RET_NOT_FOUND;
 }
 
+std::string find_HorseName()
+{
+	std::string horseName = ""; // empty string
+	for(unsigned int i = 0; i < wordVector.size(); ++i)
+	{
+		horseName = horseName + wordVector[i];
+		if(i+1 < wordVector.size()) horseName = horseName + " ";
+	}
+	return horse.horseName = horseName;	
+}
+
 retValue_t  find_DrawNo()
 {
 	horse.drawNo = 0;
@@ -183,19 +231,14 @@ retValue_t  find_DrawNo()
 			}
 		}
 	}
-	return RET_NEXT_FOUND;
+	else
+	{
+      horse.horseName = find_HorseName();
+	  return RET_NEXT_FOUND;
+	}
 }
 
-std::string find_HorseName()
-{
-	std::string horseName = ""; // empty string
-	for(unsigned int i = 0; i < wordVector.size(); ++i)
-	{
-		horseName = horseName + wordVector[i];
-		if(i+1 < wordVector.size()) horseName = horseName + " ";
-	}
-	return horseName;
-}
+
 
 // Global Function: String Find and Split (into 2 parts)
 std::pair <std::string,std::string> findSplitString(std::string inString, std::string splitIdentifier)
@@ -430,6 +473,13 @@ int main()
 				outfile << horse.drawNo;
 				outfile << ",";
 				horse.drawNo = 0;
+
+				if(!horse.horseName.empty()) // Check for empty string
+				{
+					raceCardState = RC_JOCKEY_TRAINER_NAME_STATE;
+					outfile << horse.horseName;
+					outfile << ",";
+				}
 			}
 			break;
 		case RC_HORSE_NAME_STATE:
